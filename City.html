@@ -89,7 +89,7 @@ function render(){
   root.querySelectorAll('details').forEach((d, i) => { if (openDetails[i]) d.open = true; });
   root.querySelectorAll('select[data-val]').forEach((el) => { el.value = el.getAttribute('data-val'); });
   if (ai >= 0) { const el = [...root.querySelectorAll('input,textarea')][ai]; if (el) { el.focus(); try { el.setSelectionRange(sel[0], sel[1]); } catch (e) {} } }
-  ['click', 'change', 'input'].forEach((ev) => root.querySelectorAll('[data-h-' + ev + ']').forEach((el) => {
+  ['click', 'change', 'input', 'keyup', 'compositionend'].forEach((ev) => root.querySelectorAll('[data-h-' + ev + ']').forEach((el) => {
     const f = H[+el.getAttribute('data-h-' + ev)];
     const evName = ev === 'change' && el.tagName === 'INPUT' && el.type !== 'checkbox' ? 'input' : ev;
     el.addEventListener(evName, (e) => { if (ev === 'click' && el.tagName === 'A' && (el.getAttribute('href') || '#') === '#') e.preventDefault(); f(e); });
